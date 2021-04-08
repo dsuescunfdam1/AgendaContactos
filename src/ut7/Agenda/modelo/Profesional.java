@@ -32,9 +32,16 @@ public class Profesional extends Contacto {
 
 	
 	public String getFirmaEmail() {
-		String[] Firmas = new String["Atentamente", "Saludos"];
+		String firmas[] = {"Atentamente", "Saludos", "Saludos Cordiales", "Mis mejores deseos"};
+		int aleatorio = ((int)(Math. random()*4 + 1))-1;
 		
-		return null;
+		return firmas[aleatorio];
 	}
+
+	
+	public String toString() {
+		return super.toString() +  "Empresa:" + this.getNombreEmpresa() + "\n" + "\n";
+	}
+	
 
 }
