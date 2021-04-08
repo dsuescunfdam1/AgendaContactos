@@ -2,10 +2,10 @@ package ut7.Agenda.modelo;
 
 
 public abstract class Contacto {
-	private String nombre;
-	private String apellidos;
-	private String telefono;
-	private String email;
+	protected String nombre;
+	protected String apellidos;
+	protected String telefono;
+	protected String email;
 
 	public Contacto(String nombre, String apellidos, String telefono,
 			String email) {
@@ -86,9 +86,18 @@ public abstract class Contacto {
 
 	@Override
 	public String toString() {
-		return this.getApellidos().toUpperCase() + ", " + nombre.toUpperCase() + "(" + this.getClass() + ")" + "\n" + "Tfno: " + this.getTelefono() + " |  email: " + this.getEmail() + "\n";
+		String str = " ";
+		if(this instanceof Profesional){
+			str = "Profesional";
+						
+		}
+		else{
+			str = "Personal";
+			}
+		
+		return this.getApellidos().toUpperCase() + ", " + nombre.toUpperCase() + "(" + str + ")" + "\n" + "Tfno: " + this.getTelefono() + " |  email: " + this.getEmail() + "\n";
 	}
-	
+		
 	
 
 }

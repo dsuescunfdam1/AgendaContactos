@@ -5,7 +5,7 @@ public class Profesional extends Contacto {
 
 	
 
-	public Profesional(String nombreEmpresa, String nombre, String apellidos, String telefono, String email) {
+	public Profesional(String nombre, String apellidos, String telefono, String email, String nombreEmpresa) {
 		super(nombre, apellidos, telefono, email);
 		this.nombreEmpresa = capitalizar(nombreEmpresa);
 	
@@ -40,7 +40,7 @@ public class Profesional extends Contacto {
 
 	
 	public String toString() {
-		return super.toString() +  "Empresa:" + this.getNombreEmpresa() + "\n" + "\n";
+		return super.toString() +  "Empresa: " + this.getNombreEmpresa() + "\n" + "\n";
 	}
 	
 

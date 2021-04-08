@@ -5,6 +5,7 @@ import java.util.List;
 import ut7.Agenda.modelo.Contacto;
 import ut7.Agenda.modelo.Personal;
 import ut7.Agenda.modelo.Profesional;
+import ut7.Agenda.modelo.Relacion;
 
 public class TestProfesionalPersonal {
 
