@@ -1,8 +1,7 @@
 package ut7.Agenda.modelo;
 
-import pkgconcesionario.modelo.Coche;
 
-public class Contacto {
+public abstract class Contacto {
 	private String nombre;
 	private String apellidos;
 	private String telefono;
@@ -70,17 +69,26 @@ public class Contacto {
         return c1.getApellidos().compareToIgnoreCase(c2.getApellidos());
 		}
 		else {
-			return c1.getNombre().compareToIgnoreCase(c2.getNombre())
+			return c1.getNombre().compareToIgnoreCase(c2.getNombre());
 		}
                 
         
 
     }
+	
+	public abstract String getFirmaEmail();
 
 	@Override
 	public int hashCode() {
 		return email.hashCode();
 
 	}
+
+	@Override
+	public String toString() {
+		return this.getApellidos().toUpperCase() + ", " + nombre.toUpperCase() + "(" + this.getClass() + ")" + "\n" + "Tfno: " + this.getTelefono() + " |  email: " + this.getEmail() + "\n";
+	}
+	
+	
 
 }
