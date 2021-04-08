@@ -1,4 +1,7 @@
 package ut7.Agenda.modelo;
+
+import pkgconcesionario.modelo.Coche;
+
 public class Contacto {
 	private String nombre;
 	private String apellidos;
@@ -44,6 +47,35 @@ public class Contacto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public char getPrimeraLetra() {
+		
+		return apellidos.charAt(0);
+		
+	}
+	
+	public boolean equals(Contacto otro) {
+		if (this.getClass() == otro.getClass() && apellidos.equalsIgnoreCase(otro.getApellidos()) && nombre.equalsIgnoreCase(otro.getNombre()) && email.equalsIgnoreCase(otro.getEmail()))
+		{
+		return true;
+		}
+		else {
+			return false;
+		}
+		}
+	
+	public int compare(Contacto c1, Contacto c2)
+    {
+		if(!c1.getApellidos().equalsIgnoreCase(c2.getApellidos())) {
+        return c1.getApellidos().compareToIgnoreCase(c2.getApellidos());
+		}
+		else {
+			return c1.getNombre().compareToIgnoreCase(c2.getNombre())
+		}
+                
+        
+
+    }
 
 	@Override
 	public int hashCode() {
