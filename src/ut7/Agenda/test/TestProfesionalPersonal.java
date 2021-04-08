@@ -1,4 +1,9 @@
+package ut7.Agenda.test;
 import java.util.ArrayList;
+
+import ut7.Agenda.modelo.Contacto;
+import ut7.Agenda.modelo.Personal;
+import ut7.Agenda.modelo.Profesional;
 
 public class TestProfesionalPersonal {
 
