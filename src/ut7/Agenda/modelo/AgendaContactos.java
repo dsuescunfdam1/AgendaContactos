@@ -19,6 +19,7 @@ public class AgendaContactos {
 	}
 
 	public void añadirContacto() {
+		
 
 	}
 
@@ -35,11 +36,18 @@ public class AgendaContactos {
 		return total;
 	}
 
-	public void totalContactos() {
-
+	public int totalContactos() {
+		int total = 0;
+		for(Character letra: agenda.keySet()) {
+			Iterator<Contacto> it = agenda.get(letra).iterator();
+			while(it.hasNext()) {
+				total ++;
+			}
+		}
+		
+		return total;
 	}
 
-	@Override
 	public String toString() {
 
 		return null;
