@@ -1,10 +1,13 @@
 package ut7.Agenda.modelo;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
 
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
@@ -91,9 +94,33 @@ public class AgendaContactos {
 	}
 
 	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
+		ArrayList<Personal> fecha = new ArrayList<>();
+		if(agenda.containsKey(letra)) {
+		Iterator<Contacto> it = agenda.get(letra).iterator();
+		while(it.hasNext()) {
+			if(it.next() instanceof Personal) {
+				fecha.add((Personal) it.next());
+		}
+			
+		}
+		Collections.sort(fecha, new Comparator<Personal>() {
+     		public int compare(Personal p1, Personal p2)
+            {
+     			
+                return p1.getFechaNacimiento().compareTo(p2.getFechaNacimiento());
+                        
+                
 
-		return null;
+            }
+     	
+     	});
+		return fecha;
 
 	}
+		else {
+			return null;
+		}
+		
+		}
 
 }
