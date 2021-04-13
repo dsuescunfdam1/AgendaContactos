@@ -18,8 +18,8 @@ public class AgendaContactos {
 		
 	}
 
-	public void añadirContacto() {
-		
+	public void añadirContacto(Contacto nuevo) {
+		agenda.put(nuevo.getPrimeraLetra(), nuevo);
 
 	}
 
