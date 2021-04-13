@@ -1,13 +1,17 @@
 package ut7.Agenda.modelo;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class AgendaContactos {
 	private Map<Character, Set<Contacto>> agenda;
 
 	public AgendaContactos() {
-
+		agenda = new TreeMap<>();
+		
 	}
 
 	public void añadirContacto() {
@@ -29,23 +33,61 @@ public class AgendaContactos {
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
-
-		return null;
+		ArrayList<Contacto> buscar = new ArrayList<>();
+		for(Character letra: agenda.keySet()) {
+			Iterator<Contacto> it = agenda.get(letra).iterator();
+			while(it.hasNext()) {
+				if(it.next().getNombre().contains(texto) || it.next().getApellidos().contains(texto)) {
+				buscar.add(it.next());
+			}
+		}
+		}
+		
+		return buscar;
 
 	}
 
 	public List<Personal> personalesEnLetra(char letra) {
-
-		return null;
+		ArrayList<Personal> personales = new ArrayList<>();
+		if(agenda.containsKey(letra)) {
+		Iterator<Contacto> it = agenda.get(letra).iterator();
+		while(it.hasNext()) {
+			if(it.next() instanceof Personal) {
+				personales.add((Personal) it.next());
+		}
+		
+		}
+		 return personales;
+		}
+		else {
+			return null;
+		}
 	}
 
 	public List<Personal> felicitar() {
-
-		return null;
+		ArrayList<Personal> felizCumpleaños = new ArrayList<>();
+		for(Character letra: agenda.keySet()) {
+			Iterator<Contacto> it = agenda.get(letra).iterator();
+			while(it.hasNext()) {
+				if(((Personal) it.next()).esCumpleaños()) {
+				felizCumpleaños.add((Personal) it.next());
+			}
+		}
+		}
+		return felizCumpleaños;
 	}
 
 	public void personalesPorRelacion() {
-
+		TreeMap<Relacion, String> ordenacion = new TreeMap<>();
+		for(Character letra: agenda.keySet()) {
+			Iterator<Contacto> it = agenda.get(letra).iterator();
+			while(it.hasNext()) {
+				if(it.next() instanceof Personal) {
+					String nombre = it.next().getNombre() + " " + it.next().getNombre();
+				ordenacion.put(((Personal) it.next()).getParentesco(), nombre);
+				}
+		}
+		}
 	}
 
 	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {
