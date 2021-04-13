@@ -2,6 +2,7 @@ package ut7.Agenda.modelo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,17 @@ public class AgendaContactos {
 
 	}
 
-	public void contactosEnLetra() {
-
+	public HashSet<Contacto> contactosEnLetraPersonal(char letra) {
+		
+		HashSet<Contacto> total = new HashSet<>();
+		Iterator<Contacto> it = agenda.get(letra).iterator();
+		while(it.hasNext()) {
+			if(it.next() instanceof Personal) {
+				total.add(it.next());
+			}
+			
+		}
+		return total;
 	}
 
 	public void totalContactos() {
