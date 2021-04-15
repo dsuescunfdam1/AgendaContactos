@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 public class AgendaContactos {
@@ -19,7 +20,29 @@ public class AgendaContactos {
 	}
 
 	public void añadirContacto(Contacto nuevo) {
-		agenda.put(nuevo.getPrimeraLetra(), nuevo);
+		
+		if(agenda.containsKey(nuevo.getPrimeraLetra())) {
+			boolean repe = false;
+			Iterator<Contacto> it = agenda.get(nuevo.getPrimeraLetra()).iterator();
+			while(it.hasNext()) {
+				if(it.next().equals(nuevo)) {
+					repe = true;
+				}
+				
+			}
+			if(!repe) {
+			agenda.get(nuevo.getPrimeraLetra()).add(nuevo);
+			}
+			else {
+				System.out.println("Error, no se ha podido incluir el contacto porque ya se encontraba en la lista");
+			}
+		}
+		else {
+			Set<Contacto> lista = new TreeSet<>();
+			lista.add(nuevo);
+			agenda.put(nuevo.getPrimeraLetra(), lista);
+		}
+		
 
 	}
 
