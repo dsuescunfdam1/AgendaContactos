@@ -72,8 +72,17 @@ public class AgendaContactos {
 	}
 
 	public String toString() {
-
-		return null;
+		String listado = "AGENDA DE CONTACTOS" + "\n";
+		for(Character letra: agenda.keySet()) {
+			Iterator<Contacto> it = agenda.get(letra).iterator();
+			listado += letra + "  " + "(" + agenda.get(letra).size() + "contacto/s);" + "\n" + "-------------------" + "\n";
+			
+			while(it.hasNext()) {
+				listado += it.next().toString();
+			}
+		}
+		
+		return listado;
 	}
 
 	public List<Contacto> buscarContactos(String texto) {
@@ -121,7 +130,7 @@ public class AgendaContactos {
 		return felizCumpleaños;
 	}
 
-	public void personalesPorRelacion() {
+	public TreeMap<Relacion, String> personalesPorRelacion() {
 		TreeMap<Relacion, String> ordenacion = new TreeMap<>();
 		for(Character letra: agenda.keySet()) {
 			Iterator<Contacto> it = agenda.get(letra).iterator();
@@ -132,6 +141,7 @@ public class AgendaContactos {
 				}
 		}
 		}
+		return ordenacion;
 	}
 
 	public List<Personal> personalesOrdenadosPorFechaNacimiento(char letra) {

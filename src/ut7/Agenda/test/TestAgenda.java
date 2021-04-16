@@ -1,10 +1,13 @@
 package ut7.Agenda.test;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
+import ut7.Agenda.io.AgendaIO;
 import ut7.Agenda.modelo.AgendaContactos;
 import ut7.Agenda.modelo.Contacto;
 import ut7.Agenda.modelo.Personal;
+import ut7.Agenda.modelo.Relacion;
 
 public class TestAgenda {
 
@@ -73,7 +76,7 @@ public class TestAgenda {
 	}
 
 	private static void personalesPorRelacion(AgendaContactos agenda) {
-		Map<Relacion, List<String>> map = agenda.personalesPorRelacion();
+		Map<Relacion, String> map = agenda.personalesPorRelacion();
 		map.forEach((key, value) -> System.out.println(key + "\n\t" + value));
 	}
 
