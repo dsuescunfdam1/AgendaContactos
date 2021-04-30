@@ -51,8 +51,9 @@ public class AgendaContactos {
 		HashSet<Contacto> total = new HashSet<>();
 		Iterator<Contacto> it = agenda.get(letra).iterator();
 		while(it.hasNext()) {
-			if(it.next() instanceof Personal) {
-				total.add(it.next());
+			Contacto nuevo = it.next();
+			if(nuevo instanceof Personal) {
+				total.add(nuevo);
 			}
 			
 		}
@@ -90,8 +91,9 @@ public class AgendaContactos {
 		for(Character letra: agenda.keySet()) {
 			Iterator<Contacto> it = agenda.get(letra).iterator();
 			while(it.hasNext()) {
-				if(it.next().getNombre().contains(texto) || it.next().getApellidos().contains(texto)) {
-				buscar.add(it.next());
+				Contacto mirar = it.next();
+				if(mirar.getNombre().contains(texto) || mirar.getApellidos().contains(texto)) {
+				buscar.add(mirar);
 			}
 		}
 		}
@@ -105,8 +107,9 @@ public class AgendaContactos {
 		if(agenda.containsKey(letra)) {
 		Iterator<Contacto> it = agenda.get(letra).iterator();
 		while(it.hasNext()) {
-			if(it.next() instanceof Personal) {
-				personales.add((Personal) it.next());
+			Contacto mirar = it.next();
+			if(mirar instanceof Personal) {
+				personales.add((Personal) mirar);
 		}
 		
 		}
@@ -122,8 +125,9 @@ public class AgendaContactos {
 		for(Character letra: agenda.keySet()) {
 			Iterator<Contacto> it = agenda.get(letra).iterator();
 			while(it.hasNext()) {
-				if(((Personal) it.next()).esCumpleaños()) {
-				felizCumpleaños.add((Personal) it.next());
+				Contacto feliz = it.next();
+				if(((Personal) feliz).esCumpleaños()) {
+				felizCumpleaños.add((Personal) feliz);
 			}
 		}
 		}
@@ -135,9 +139,10 @@ public class AgendaContactos {
 		for(Character letra: agenda.keySet()) {
 			Iterator<Contacto> it = agenda.get(letra).iterator();
 			while(it.hasNext()) {
+				Contacto comprobar = it.next();
 				if(it.next() instanceof Personal) {
-					String nombre = it.next().getNombre() + " " + it.next().getNombre();
-				ordenacion.put(((Personal) it.next()).getParentesco(), nombre);
+					String nombre = comprobar.getNombre() + " " + comprobar.getNombre();
+				ordenacion.put(((Personal) comprobar).getParentesco(), nombre);
 				}
 		}
 		}
@@ -149,8 +154,10 @@ public class AgendaContactos {
 		if(agenda.containsKey(letra)) {
 		Iterator<Contacto> it = agenda.get(letra).iterator();
 		while(it.hasNext()) {
-			if(it.next() instanceof Personal) {
-				fecha.add((Personal) it.next());
+			
+			Contacto orden = it.next();
+			if(orden instanceof Personal) {
+				fecha.add((Personal) orden);
 		}
 			
 		}

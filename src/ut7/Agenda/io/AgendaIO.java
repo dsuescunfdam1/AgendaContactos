@@ -31,36 +31,11 @@ public class AgendaIO {
 			return nuevo;
 		}
 		else if(Integer.parseInt(datos[0]) == 2) {
-			Relacion parentesco = null;
-			if(datos[6].equalsIgnoreCase("amigos")) {
-				parentesco = Relacion.AMIGOS;
-			}
-			else if(datos[6].equalsIgnoreCase("hija")) {
-				parentesco = Relacion.HIJA;
-			}
-			else if(datos[6].equalsIgnoreCase("hijo")) {
-				parentesco = Relacion.HIJO;
-			}
-			else if(datos[6].equalsIgnoreCase("madre")) {
-				parentesco = Relacion.MADRE;
-			}
-			else if(datos[6].equalsIgnoreCase("padre")) {
-				parentesco = Relacion.PADRE;
-			}
-			else if(datos[6].equalsIgnoreCase("pareja")) {
-				parentesco = Relacion.PAREJA;
-			}
+			Relacion parentesco = Relacion.valueOf(datos[6]);
 			Contacto nuevo = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], parentesco);
 			return nuevo;
 		}
 		
 		return null;
 	}
-
-	/**
-	 * 
-	 * @return un array de String con todas las líneas de información de todos
-	 *         los contactos. 1 significa contacto profesional, 2 significa
-	 *         contacto personal
-	 */
 }
