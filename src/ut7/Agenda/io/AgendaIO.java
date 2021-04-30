@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.TreeMap;
 
 /**
  * Utilidades para cargar la agenda
@@ -73,10 +74,12 @@ public class AgendaIO {
 		else if(Integer.parseInt(datos[0]) == 2) {
 			Relacion parentesco;
 			try {
+				
 				parentesco = Relacion.valueOf(datos[6]);
 				Contacto nuevo = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], parentesco);
 				return nuevo;
-			} catch (Exception e) {
+				
+			} catch (EnumConstantNotPresentException e) {
 				
 				e.printStackTrace();
 			}
@@ -84,5 +87,50 @@ public class AgendaIO {
 		}
 		
 		return null;
+	}
+	
+	public static void exportarPersonales(AgendaContactos agenda, String nombre) {
+		
+		
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(
+	                nombre));
+			TreeMap<Relacion, String> ordenacion = agenda.personalesPorRelacion();
+			writer.write("PADRE");
+	        writer.newLine();
+	        writer.write(ordenacion.get(Relacion.valueOf("PADRE")));
+	        writer.newLine();
+	        writer.write("AMIGOS");
+	        writer.newLine();
+	        writer.write(ordenacion.get(Relacion.valueOf("AMIGOS")));
+	        writer.newLine();
+	        writer.write("PAREJA");
+	        writer.newLine();
+	        writer.write(ordenacion.get(Relacion.valueOf("PAREJA")));
+	        writer.newLine();
+	        writer.write("HIJA");
+	        writer.newLine();
+	        writer.write(ordenacion.get(Relacion.valueOf("HIJA")));
+	        writer.close();
+			
+	     
+		}
+		
+		catch (FileNotFoundException e) {
+			
+			System.out.println("Error de IO " + e.getMessage());
+		
+
+		}
+		catch (IOException e) {
+			
+			System.out.println("Error de IO " + e.getMessage());
+		}
+		
+
+		
+			
+		
+		
 	}
 }

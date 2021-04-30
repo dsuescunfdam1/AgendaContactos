@@ -141,7 +141,7 @@ public class AgendaContactos {
 			while(it.hasNext()) {
 				Contacto comprobar = it.next();
 				if(it.next() instanceof Personal) {
-					String nombre = comprobar.getNombre() + " " + comprobar.getNombre();
+					String nombre = comprobar.getNombre() + " " + comprobar.getApellidos();
 				ordenacion.put(((Personal) comprobar).getParentesco(), nombre);
 				}
 		}
