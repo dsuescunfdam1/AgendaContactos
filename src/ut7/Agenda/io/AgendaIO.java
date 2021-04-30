@@ -6,16 +6,56 @@ import ut7.Agenda.modelo.Personal;
 import ut7.Agenda.modelo.Profesional;
 import ut7.Agenda.modelo.Relacion;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Utilidades para cargar la agenda
  */
 public class AgendaIO {
 
-	public static void importar(AgendaContactos agenda) {
-		for(String lineas: obtenerLineasDatos()){
-			Contacto nuevo = parsearLinea(lineas);
+	public static int importar(AgendaContactos agenda, String nombre) {
+		BufferedReader entrada = null;
+		int errores = 0;
+		try {
+			File f = new File(nombre);
+			entrada = new BufferedReader(new FileReader(f));
+			String linea = entrada.readLine();
+		while (linea != null) {
+			Contacto nuevo = parsearLinea(linea);
 			agenda.añadirContacto(nuevo);
 		}
+		}
+		catch (FileNotFoundException e) {
+			
+			System.out.println("Error de IO " + e.getMessage());
+			errores++;
+
+		}
+		catch (IOException e) {
+			errores++;
+			System.out.println("Error de IO " + e.getMessage());
+		}
+
+		finally {
+			if (entrada != null) {
+				try {
+					entrada.close();
+				}
+				catch (IOException e) {
+					errores++;
+					System.out.println("Error de IO al cerrar el fichero");
+				}
+			}
+		}
+		return errores;
+
 		
 		
 
@@ -31,9 +71,16 @@ public class AgendaIO {
 			return nuevo;
 		}
 		else if(Integer.parseInt(datos[0]) == 2) {
-			Relacion parentesco = Relacion.valueOf(datos[6]);
-			Contacto nuevo = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], parentesco);
-			return nuevo;
+			Relacion parentesco;
+			try {
+				parentesco = Relacion.valueOf(datos[6]);
+				Contacto nuevo = new Personal(datos[1], datos[2], datos[3], datos[4], datos[5], parentesco);
+				return nuevo;
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return null;
