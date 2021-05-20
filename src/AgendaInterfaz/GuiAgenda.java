@@ -239,4 +239,3 @@ public class GuiAgenda extends Application {
 		launch(args);
 	}
 }
-
