@@ -1,4 +1,6 @@
 package AgendaInterfaz;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -18,6 +20,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ut7.Agenda.modelo.AgendaContactos;
+import ut7.Agenda.modelo.Contacto;
 
 public class GuiAgenda extends Application {
 	private AgendaContactos agenda;
@@ -82,9 +85,9 @@ public class GuiAgenda extends Application {
 		// a completar
 		VBox panel = new VBox();
 		panel.setPadding(new Insets(10));
-		areaTexto.setPromptText("Buscar");
-		areaTexto.setMinHeight(40);
-		areaTexto.setPadding(new Insets(40));
+		txtBuscar.setPromptText("Buscar");
+		txtBuscar.setMinHeight(40);
+		txtBuscar.setPadding(new Insets(40));
 		
 		rbtListarSoloNumero = new RadioButton("Listar Solo Numero");
 		
@@ -123,7 +126,7 @@ public class GuiAgenda extends Application {
 		btnSalir.setPrefWidth(250);
 		btnSalir.setOnAction(event -> salir());
 		
-		panel.getChildren().addAll(areaTexto, rbtListarTodo, rbtListarSoloNumero, btnListar, btnPersonalesEnLetra, btnPersonalesOrdenadosPorFecha, btnClear, btnSalir);
+		panel.getChildren().addAll(txtBuscar, rbtListarTodo, rbtListarSoloNumero, btnListar, btnPersonalesEnLetra, btnPersonalesOrdenadosPorFecha, btnClear, btnSalir);
 		
 		
 		
@@ -274,6 +277,20 @@ public class GuiAgenda extends Application {
 	private void buscar() {
 		clear();
 		// a completar
+		ArrayList<Contacto> buscar = (ArrayList<Contacto>) agenda.buscarContactos(txtBuscar.getText());
+		if(txtBuscar.getText() == null) {
+			System.out.println("No se ha introducido ningun texto");
+		}
+		else if(buscar == null) {
+			System.out.println("No existe ese contacto");
+		}
+		else {
+			String nuevo = "";
+		for(Contacto añadir: buscar) {
+			nuevo = añadir.toString();
+		}
+		areaTexto.setText(nuevo);
+		}
 
 		cogerFoco();
 
