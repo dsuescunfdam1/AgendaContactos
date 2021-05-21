@@ -12,7 +12,7 @@ import java.util.TreeSet;
 
 
 public class AgendaContactos {
-	private Map<Character, Set<Contacto>> agenda;
+	public Map<Character, Set<Contacto>> agenda;
 
 	public AgendaContactos() {
 		agenda = new TreeMap<>();

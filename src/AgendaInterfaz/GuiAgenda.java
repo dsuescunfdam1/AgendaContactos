@@ -1,11 +1,20 @@
 package AgendaInterfaz;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -21,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ut7.Agenda.modelo.AgendaContactos;
 import ut7.Agenda.modelo.Contacto;
+import ut7.Agenda.modelo.Personal;
 
 public class GuiAgenda extends Application {
 	private AgendaContactos agenda;
@@ -254,23 +264,68 @@ public class GuiAgenda extends Application {
 	private void personalesOrdenadosPorFecha() {
 		clear();
 		// a completar
-
+		
+		 String[] choices = { "A", "B", "C", "D", "E", "F", "G","H", "I", "J", "K", "L", "M","N", "Ñ", "O","P","Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+		    String input = (String) JOptionPane.showInputDialog(null, "Elije",
+		        "Introduce una letra", JOptionPane.QUESTION_MESSAGE, null, choices, choices[1]);
+		    List<Personal> buscar = agenda.personalesOrdenadosPorFechaNacimiento(input.charAt(0));
+			 
+			String nuevo = " ";
+		for(Contacto añadir: buscar) {
+			nuevo = añadir.toString();
+		}
+		areaTexto.setText(nuevo);
+		    
 	}
 
-	private void contactosPersonalesEnLetra() {
+	private void contactosPersonalesEnLetra(char letra) {
 		clear();
 		// a completar
+		 List<Personal> buscar = agenda.personalesEnLetra(letra);
+		 
+			String nuevo = " ";
+		for(Contacto añadir: buscar) {
+			nuevo = añadir.toString();
+		}
+		areaTexto.setText(nuevo);
 
 	}
 
 	private void contactosEnLetra(char letra) {
 		clear();
 		// a completar
+		ArrayList<Personal> personales = new ArrayList<>();
+		if(agenda.agenda.containsKey(letra)) {
+		Iterator<Contacto> it = agenda.agenda.get(letra).iterator();
+		while(it.hasNext()) {
+			Contacto mirar = it.next();
+			personales.add((Personal) mirar);
+		
+		}
+		
+		}
+		else {
+			System.out.println("No hay ninguno con letra");
+		}
+		String nuevo = " ";
+		for(Contacto añadir: personales) {
+			nuevo = añadir.toString();
+		}
+	areaTexto.setText(nuevo);
 	}
 
 	private void felicitar() {
 		clear();
 		// a completar
+		
+		List<Personal> buscar = agenda.felicitar();
+		 
+				String nuevo = " ";
+			for(Contacto añadir: buscar) {
+				nuevo = añadir.toString();
+			}
+			areaTexto.setText(nuevo);
+		
 
 	}
 
@@ -298,6 +353,16 @@ public class GuiAgenda extends Application {
 
 	private void about() {
 		// a completar
+		Alert alerta = new Alert(Alert.AlertType.WARNING);
+
+		
+		DialogPane dialogPane = alerta.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().
+		getResource("/application.css").toExternalForm());
+		
+		alerta.setHeaderText("About Agenda de Contactos");
+		alerta.setContentText("Mi agenda de contactos");
+		alerta.showAndWait();
 
 	}
 
